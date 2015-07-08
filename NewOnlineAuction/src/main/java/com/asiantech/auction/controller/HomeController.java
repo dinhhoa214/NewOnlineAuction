@@ -1,9 +1,12 @@
 package com.asiantech.auction.controller;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +21,8 @@ import com.asiantech.auction.service.ImageService;
 @Controller 
 public class HomeController {
 
-	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	@Autowired
+	private PasswordEncoder passwordEncoder ;
 	
 	@Autowired 
 	CategoryService categorySv;
@@ -30,8 +34,8 @@ public class HomeController {
 	ImageService imageSv;
 	
 	@RequestMapping({"/","/home","/index"})
-    public String getHomePage(Account account, Model model){
-		model.addAttribute(account); 
+    public String getHomePage(Account account, Model model, Principal principal){
+		model.addAttribute(principal); 
 	    model.addAttribute("categories", categorySv.getAll());     
         model.addAttribute("pageview", "homepage");
         return "pages-views";

@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.asiantech.auction.entity.Account;
 
-public interface AccountService  extends UserDetailsService{
+public interface AccountService {
 	public static String NAME = "accountService";
 	// CRUD operations
 	// Save or Update

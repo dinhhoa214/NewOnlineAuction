@@ -26,7 +26,8 @@
 <script th:src="@{/resources/js/bootstrapValidator.min.js}"></script>
 </head>
 <body>
-	<div th:replace="templates/headerhomepage :: headerhomepage"></div>
+	<!-- <div th:replace="fragments/header :: ${#authentication.principal} ? 'header' : 'headeruser' "> </div> -->
+	
 	<div th:replace="${pageview} :: content">Main content</div>
 	<div th:replace="templates/footer :: footer"></div>
 </body>

@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,8 @@ import com.asiantech.auction.entity.Account.Role;
 import com.asiantech.auction.repository.AccountRepository;
 
 @Service(AccountService.NAME)
-public class AccountServiceImpl implements AccountService {
-	@Resource
+public class AccountServiceImpl implements AccountService,UserDetailsService {
+	@Autowired
 	AccountRepository userRepositoty;
 
 	/*
@@ -60,15 +62,18 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public UserDetails loadUserByUsername(String email)
 			throws UsernameNotFoundException {
+		System.out.println(email);
 		Account acLogin = getUserByEmail(email);
+		
 		User user = new User(acLogin.getEmail(), acLogin.getPassword(), 
 				true, true, true,true, getAuthorities(acLogin.getRole()));
 		return user;
 	}
 
 	@Override
-	public Account getUserByEmail(String email) {
+	public Account getUserByEmail(String email) { 
 		Account account = userRepositoty.findByEmail(email);
+		
 		return account;
 	}
 
