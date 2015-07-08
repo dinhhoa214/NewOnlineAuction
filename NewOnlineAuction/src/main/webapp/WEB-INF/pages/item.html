@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+</head>
+<body>
+
+	<div th:fragment="content">
+		<div class="container">
+			<!-- Content Category-->
+			<div class="row">
+				<!-- Bread crumb -->
+				<ol class="breadcrumb">
+					<li><a href="#">Home</a></li>
+					<li><a th:href="@{/category/} + ${categoryName}"
+						th:text=" ${categoryName} "> Category</a></li>
+					<li class="active"><span th:text=" ${item.itemTitle} ">
+					</span></li>
+				</ol>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-4">
+					<label th:text="|${item.itemTitle}|"> </label>
+					<p>
+						<strong>Description: </strong><span
+							th:text=" ${item.itemDescription} "> </span>
+					</p>
+					<strong>Seller:</strong> <a
+						th:href="@{/user/} + ${item.createrId.userName}"
+						th:text="${item.createrId.userName}"> dinhhoa.vta </a>
+					<p>
+						<input type="number" data-max="10" data-min="1"
+							name="your_awesome_parameter" id="some_id" class="rating"
+							data-clearable="remove" data-icon-lib="fa"
+							data-active-icon="fa-star" data-inactive-icon="fa-star-o"
+							data-clearable-icon="fa-trash-o" />
+					</p>
+					<img th:src="@{/resources/image/acer_450.jpg}"
+						src="../../../resources/image/acer_450.jpg" class="img-thumbnail"
+						style="width: 300px; height: 250px" />
+
+				</div>
+				<div class="col-sm-6">
+
+					<br /> <br />
+					<br />
+					<p>
+						<strong>End: <span id="clock" data-countdown="2017/01/01"></span>
+						</strong>
+					</p>
+
+					<!-- <span th:text="| Item ${item.itemTitle} |"> </span> ${item.itemTitle} -->
+
+					<form th:action="@{/bidItem/} + ${item.itemId}" th:object="${bid}" method="post">
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th colspan="2" class="panel-heading">Item Details</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Currently: <span th:text=" ${bidtop.amount} ">VND</span></td>
+									<td>Start Bid: <span th:text=" ${item.miniumBid} ">VND</span></td>
+								</tr>
+								<tr>
+									<td>Start: <span th:text=" ${item.bidStartDate} "></span></td>
+									<td>Bids: <span th:text=" ${item.bids} "></span></td>
+								</tr>
+								<tr>
+									<td>End: <span th:text=" ${item.bidEndDate} "></span></td>
+								</tr>
+								<tr>
+									<td>Bid Imcrement: <span th:text=" ${item.bidIncremenet} ">VND</span></td>
+									<td>Minium Bid: <span th:text=" ${item.miniumBid} ">VND</span></td>
+								</tr>
+								<tr>
+									<td>Your Bid:</td>
+									<td><input type="text" th:field="*{amount}" placeholder="VND" />   
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="submit" value="BID"
+										class="btn btn-success" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Bid ID</th>
+								<th>Bidder</th>
+								<th>Price</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr data-th-each="us,i : ${bids}">
+								<td data-th-text="${i.count}">1</td>
+
+								<td data-th-text="${us.numberIndex}">Dang su dung</td>
+								<td data-th-text="${us.bidderId.userName}">false</td>
+								<td data-th-text="${us.amount}">false</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- end Container -->
+		<!-- inclde footer -->
+
+
+
+		<script src="js/jquery-latest.min.js"
+			th:src="@{/resources/js/jquery-latest.min.js}">
+	</script>
+		<script src="jquery/jquery.countdown.min.js"
+			th:src="@{/resources/jquery/jquery.countdown.min.js}">
+	</script>
+		<script th:inline="javascript"> 
+$('[data-countdown]').each(function() {
+   var $this = $(this), finalDate = [[${item.bidEndDate}]];
+   $this.countdown(finalDate, function(event) {
+    $this.html(event.strftime('%D Days %H hours, %M minutes, %S seconds.'));
+   });
+   $this.on('finish.countdown', function(event) {
+	     alert('Auction ended. User dinhhoa.vta is winter.');
+   });
+  });
+    </script>
+		<script src="js/bootstrap.min.js"
+			th:src="@{/resources/js/bootstrap.min.js}"></script>
+		<script src="js/bootstrap-hover-dropdown.js"
+			th:src="@{/resources/js/bootstrap-hover-dropdown.js}"></script>
+		<script src="js/bootstrap-rating-input.min.js"
+			th:src="@{/resources/js/bootstrap-rating-input.min.js}"></script>
+		<script>
+		// very simple to use!
+		$(document).ready(function() {
+			$('.js-activated').dropdownHover().dropdown();
+		});
+	</script>
+		<!-- <script>
+      $(function(){
+        $('input').on('change', function(){
+          alert("Changed: " + $(this).val())
+        });
+      });
+      
+    </script> -->
+	</div>
+</body>
+</html>

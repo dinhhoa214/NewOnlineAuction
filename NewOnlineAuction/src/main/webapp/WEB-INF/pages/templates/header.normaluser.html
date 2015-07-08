@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+</head>
+<body>
+	<div th:fragment="header">
+		<!-- Fixed navbar Header-->
+		<nav class="navbar navbar-default ">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" th:href="@{/index}">Logo Online Auction</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/index}">Home</a></li>
+					<li><a href="#about">About us</a></li>
+					<li><a href="#contact">News</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a class="dropdown-toggle" href="#"
+						data-toggle="dropdown"> <i class="fa fa-bell fa-fw"></i> <i
+							class="fa fa-caret-down"></i></a>
+						<ul class="dropdown-menu dropdown-alerts">
+							<li><a href="#">
+								 
+										<i class="fa fa-comment fa-fw"></i> New Comment <span
+											class="pull-right text-muted small">4 minutes ago</span>
+								 
+							</a></li>
+							<li class="divider"></li>
+							<li><a href="#">
+							 
+										<i class="fa fa-twitter fa-fw"></i> 3 New Followers <span
+											class="pull-right text-muted small">12 minutes ago</span>
+						 
+							</a></li>
+							<li class="divider"></li>
+							<li><a class="text-center" href="#"> <strong>See
+										All Alerts</strong> <i class="fa fa-angle-right"></i>
+							</a></li>
+						</ul> <!-- /.dropdown-alerts --></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"> <i class="fa fa-user fa-fw"></i><i
+							class="caret"></i>
+					</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+									Profile</a></li>
+							<li><a href="#"><i class="fa fa-gear fa-fw"></i>
+									Settings</a></li>
+							<li class="divider"></li>
+							<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
+									Logout</a></li>
+						</ul> <!-- /.dropdown-user --></li>
+				</ul>
+				<!-- /.navbar-top-links -->
+			</div>
+			<!--/.nav-collapse -->
+
+		</nav>
+		<div class="container">
+			<div class="row top-row">
+				<div class="col-md-2">
+					<div class="btn-group">
+						<button class="btn dropdown-toggle" data-toggle="dropdown"
+							data-hover="dropdown" data-delay="1000">
+							<strong>By Categories</strong> <b class="caret"></b>
+						</button>
+						<ul class="dropdownwidth dropdown-menu ">
+							<li role="presentation" class="dropdown-header">List of
+								Categories</li>
+							<li th:each="cate : ${categories}" class="dropdown-header-cate">
+								<a tabindex="-1"  
+								th:href="@{/category/} + ${cate.name}" th:text="${cate.name}">Laptop</a>
+							</li>
+							<li class="divider"></li>
+							<li><a tabindex="-1" href="#">Another</a></li>
+							<li class="divider"></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-10">
+					<form role="form">
+
+						<div class="form-group  col-md-8">
+							<input type="text" class="form-control"
+								placeholder="Search text .." />
+						</div>
+						<div class="form-group  col-md-2">
+							<div class="btn-group">
+								<button class="form-control btn dropdown-toggle"
+									data-toggle="dropdown" data-hover="dropdown" data-delay="1000">
+									All <b class="caret"></b>
+								</button>
+								<ul class="dropdown-menu">
+									<li th:each="cate : ${categories}" class="dropdown-header-cate">
+										<a tabindex="-1" href="#" th:text="${cate.name}">Laptop</a>
+									</li>
+									<li class="divider"></li>
+									<li><a tabindex="-1" href="#">Another</a></li>
+									<li class="divider"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="form-group  col-md-2">
+							<button type="submit" class="form-control btn btn-primary">Search</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- Xong header -->
+		</div>
+
+	</div>
+
+</body>
+</html>

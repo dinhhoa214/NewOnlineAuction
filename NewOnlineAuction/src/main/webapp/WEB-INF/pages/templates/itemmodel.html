@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+</head>
+<body>
+<div class="container">
+		<div class="table-responsive" th:fragment="accountTable">
+		<table id="myTable" class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Item Id</th>
+					<th>Category ID</th>
+					 
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-th-each="acc : ${items}">
+					<td data-th-text="${acc.itemId}">1</td>
+					<td data-th-text="${acc.category.Id}">John</td> 
+
+					<td><a href="#"
+						th:href="@{/edit}">Edit
+					</a></td>
+					<td>
+						<button >Delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+</body>
+</html>	

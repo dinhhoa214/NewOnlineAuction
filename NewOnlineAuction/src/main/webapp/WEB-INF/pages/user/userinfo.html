@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Online Auction Home Page</title>
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/resources/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" href="css/auction.custom.css"
+	th:href="@{/resources/css/auction.custom.css}" />
+<!-- Custom Fonts -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" 
+    th:href="@{/resources/css/font-awesome.min.css}" /> 	
+</head>
+<body>
+
+	<div th:replace="templates/header :: header"></div>
+	<div class="container">
+		 <!-- Content -->
+		 <img src="../../../resources/image/badminton_cabinet.jpg" class="img-thumbnail" />
+		 <img th:attr="src=@{${user.image}}" style="width: 50px; height: 50px;" class="img-thumbnail"/> 
+					
+					<a href="#">Badminton Cabinet </a> <img
+					th:src="@{|/${user.image}|}" 
+					class="img-thumbnail" style="width: 150px; height: 150px;"/>
+					<span th:text="${user.image}">ds</span>
+					<span th:text="${user.userName}">ds</span>
+	</div>
+	<!-- end Container -->
+	<!-- inclde footer -->
+	<div th:replace="templates/footer :: footer"></div>
+	<script src="js/jquery-latest.min.js"
+		th:src="@{/resources/js/jquery-latest.min.js}">
+		
+	</script>
+	<script src="js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+	<script src="js/bootstrap-hover-dropdown.js"
+		th:src="@{/resources/js/bootstrap-hover-dropdown.js}"></script>
+
+	<script>
+		// very simple to use!
+		$(document).ready(function() {
+			$('.js-activated').dropdownHover().dropdown();
+		});
+	</script>
+</body>
+</html>

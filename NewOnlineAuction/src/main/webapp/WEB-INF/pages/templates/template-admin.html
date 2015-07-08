@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin User Page</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/admin/metisMenu.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/admin/timeline.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/font-awesome.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/admin/morris.css}" />
+<!-- Custom CSS admin-->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/admin/sb-admin-2.css}" />
+</head>
+<body>
+	<div th:replace="templates/headeradmin :: headeradmin"></div>
+	<div th:replace="${pageview} :: content">Main content</div>
+	<div th:replace="templates/footeradmin :: footeradmin"></div>
+</body>
+</html>
