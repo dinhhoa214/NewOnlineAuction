@@ -1,26 +1,12 @@
 package com.asiantech.auction.controller;
   
-import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.stereotype.Controller;  
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;  
-import com.asiantech.auction.service.CategoryService;
-import com.asiantech.auction.service.ItemService;
-import com.asiantech.auction.service.AccountService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	@Autowired 
-	AccountService userSv;
-	
-	@Autowired 
-	CategoryService categorySv;
-	
-	@Autowired 
-	ItemService itemSv;
-	
-	
 	//default method is get
 	//you can implement pageable of spring
 	

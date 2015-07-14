@@ -1,42 +1,42 @@
 package com.asiantech.auction.service;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;  
 import org.springframework.stereotype.Service;
 
 import com.asiantech.auction.entity.Bid;
-import com.asiantech.auction.entity.Item;
-import com.asiantech.auction.repository.AccountRepository;
-import com.asiantech.auction.repository.BidRepository;
-import com.asiantech.auction.repository.ItemRepository;
+import com.asiantech.auction.entity.Item; 
+import com.asiantech.auction.repository.BidRepository; 
  
 @Service(BidService.NAME)
 public class BidServiceImpl implements BidService{
 	@Resource
 	BidRepository bidRepository; 
 	
-	@Resource
-	ItemRepository itemRepository;
+	@Autowired 
+	ItemService itemSv; 
 	
-	@Resource
-	AccountRepository accountRepository;
+	@Autowired 
+	AccountService accountSv;
 	
 	@Override
-	public boolean insertBid(Bid bid, int itemId){
+	public boolean insertBid(Bid bid){
 		try{
-			Item item = itemRepository.findOne(itemId);
+			Item item = itemSv.getById(bid.getItemId().getItemId());
 			bid.setItemId(item);
+			String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+			bid.setDate(date);
 			if(bid.getAmount()==0)
-				bid.setAmount(bidRepository.findFirstByOrderByAmountDesc().getAmount()+item.getBidIncremenet());
-			
-			
-			bid.setBidderId(accountRepository.findOne(5));
+				bid.setAmount(bidRepository.findFirstByItemIdOrderByAmountDesc(item).getAmount()+item.getBidIncremenet());
 			bidRepository.save(bid);
 			item.setBids(item.getBids()+1);
-			itemRepository.save(item);
+			itemSv.updateItem(item);
 			return true;
 		}
 		catch(Exception ex){
@@ -54,9 +54,9 @@ public class BidServiceImpl implements BidService{
 
 
 	@Override
-	public List<Bid> getAllByItemId(Item it) {
+	public List<Bid> getTop10ByItemId(Item it) {
 		 
-		return bidRepository.findByItemId(it);
+		return bidRepository.findTop10ByItemIdOrderByAmountDesc(it);
 	}
 
 
@@ -64,10 +64,11 @@ public class BidServiceImpl implements BidService{
 	public Bid getById(int id) { 
 		return bidRepository.findOne(id);
 	}
-	
+
+
 	@Override
-	public Bid getByAmountTop() {
-		return bidRepository.findFirstByOrderByAmountDesc();
+	public Bid getByItemOrderAmountTop(Item item) {
+		return bidRepository.findFirstByItemIdOrderByAmountDesc(item);
 	}
 
 

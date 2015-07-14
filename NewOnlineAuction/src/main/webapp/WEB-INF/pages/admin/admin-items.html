@@ -101,7 +101,10 @@
 											<td data-th-text="${it.bidIncremenet}">false</td>
 											<td data-th-text="${it.miniumBid}">false</td>
 											<td data-th-text="${it.currentBid}">false</td>
-											<td><a href="#">Edit </a> /</td>
+											<td><a th:if="${(it.statusBid) == T(com.asiantech.auction.entity.Item.StatusBid).I}"
+											th:href="@{activeItem(id=${it.itemId})}"> Active </a> 
+											<a th:if="${(it.statusBid) != T(com.asiantech.auction.entity.Item.StatusBid).I}"
+											th:href="@{inActiveItem(id=${it.itemId})}" class="fa  fa-lock fa-fw"></a></td>
 										</tr>
 
 									</tbody>

@@ -1,21 +1,29 @@
 package com.asiantech.auction.controller;
  
 
-import org.springframework.beans.factory.annotation.Autowired; 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model; 
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.asiantech.auction.entity.Bid; 
+import com.asiantech.auction.entity.Account;
+import com.asiantech.auction.entity.Bid;
+import com.asiantech.auction.entity.Category;
 import com.asiantech.auction.entity.Item;
 import com.asiantech.auction.service.AccountService;
 import com.asiantech.auction.service.BidService;
 import com.asiantech.auction.service.CategoryService;
 import com.asiantech.auction.service.ItemService;
 @Controller
+@RequestMapping("/item")
 public class UserItemController {
 	
 	@Autowired 
@@ -30,47 +38,34 @@ public class UserItemController {
 	@Autowired 
 	AccountService accountSv;
 	
-	@RequestMapping("/item/{id}")
+	@ModelAttribute("categories")
+	public List<Category> seeAllCategories() {
+	    return categorySv.getAll();
+	}
+	
+	@RequestMapping("/{id}")
     public String getItemPage(@PathVariable("id") Integer itemId, Bid bid, Model model){
-		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		String date = sdf.format(new Date()); 
-		System.out.println(date); //15/10/2013
-*/		String dateInString = "2015/07/12 17:13:15"; 
-		model.addAttribute("endtime",dateInString);
-		/*Date date2;
-		try {
-			date2 = sdf.parse(dateInString);
-			Date end = date - date2;
-			System.out.println(sdf.format(date2)); 
-		} catch (ParseException e) {
-			 
-			e.printStackTrace();
-		}*/
-		Item item = itemSv.getById(itemId);
-		model.addAttribute("categories", categorySv.getAll());
-		model.addAttribute("categoryName", item.getCategory().getName());
-		model.addAttribute("item", item);
-		model.addAttribute("bidtop", bidSv.getByAmountTop());
-		model.addAttribute("bids", bidSv.getAllByItemId(item));
+		Item item = itemSv.getById(itemId); 
+		model.addAttribute(item);
+		model.addAttribute(bid);
+		model.addAttribute("bidtop", bidSv.getByItemOrderAmountTop(item));
+		model.addAttribute("bids", bidSv.getTop10ByItemId(item));
 		model.addAttribute("pageview", "item");
-        return "pages-views"; 
+		return "PAGES-VIEWS";
     }
 	
-	@RequestMapping(value = "/bidItem/{id}", method = RequestMethod.POST)
-	public String insertBid(@PathVariable("id") Integer itemId, 
-			@ModelAttribute Bid bid,Model model) {  
-		System.out.println(bid.getItemId());
-		if(bidSv.insertBid(bid, itemId) == true)
+	@RequestMapping(value = "bidItem{id}", method = RequestMethod.POST)
+	public String insertBid(@PathVariable("id") Integer itemId,
+			@ModelAttribute("bid") Bid bid, Model model) {  
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		Account account = accountSv.getUserByEmail(email);
+		Item item = itemSv.getById(itemId);
+		bid.setBidderId(account);
+		bid.setItemId(item);
+		
+		if(!bidSv.insertBid(bid))
 			return "redirect:/item/"+itemId;
-		return "redirec:/index";
-	}
-	 
-	
-	@RequestMapping(value="/user/cruditem", method=RequestMethod.GET)
-    public String getCrudItemPage(Model model){
-		model.addAttribute("categories", categorySv.getAll());
-		model.addAttribute("pageview", "user/cruditem");
-        return "user/USER-VIEWS"; 
-    } 
-	
+		return "redirect:/item/"+itemId;
+	} 
 }

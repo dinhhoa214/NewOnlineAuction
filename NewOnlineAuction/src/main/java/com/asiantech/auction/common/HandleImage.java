@@ -13,8 +13,7 @@ public class HandleImage{
 	@Value("${"+SystemConstant.IMAGE_DOCROOT+"}")
 	private String rootbaseImg;
 	
-	public String getPathImg(String url,String urlImage){
-		//System.out.println(rootbaseImg + File.separator + url + File.separator + urlImage);
+	public String getPathImg(String url,String urlImage){ 
 		return rootbaseImg + File.separator + url + File.separator + urlImage;
 	}
 	

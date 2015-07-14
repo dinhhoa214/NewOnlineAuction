@@ -42,12 +42,20 @@ http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
 		<beans:property name="prefix" value="/WEB-INF/pages/" />
 		<beans:property name="suffix" value=".html" />
-		<beans:property name="templateMode" value="HTML5" /> 
+		<beans:property name="templateMode" value="HTML5" />
 		<beans:property name="cacheable" value="false" />
 	</beans:bean>
 
 	<beans:bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<beans:property name="templateResolver" ref="templateResolver" />
+		<beans:property name="additionalDialects">
+			<beans:set>
+				<!-- Note the package would change to 'springsecurity3' if you are using 
+					that version -->
+				<beans:bean
+					class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect" />
+			</beans:set>
+		</beans:property>
 	</beans:bean>
 
 	<beans:bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
@@ -55,7 +63,7 @@ http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 	</beans:bean>
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-		 
+
 
 	<!-- declare datasource bean -->
 	<beans:bean id="dataSource"
@@ -89,20 +97,38 @@ http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<jpa:repositories base-package="com.asiantech.auction.repository" />
 
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" />
+		<beans:property name="username" value="dinhhoa.vta@gmail.com" />
+		<beans:property name="password" value="dinhhoa123!@#" />
+
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="mailMail" class="com.asiantech.auction.common.MailMail">
+		<beans:property name="mailSender" ref="mailSender" />
+	</beans:bean>
+
 	<authentication-manager>
 		<authentication-provider user-service-ref="accountService">
 			<password-encoder ref="encoder" />
 		</authentication-provider>
 	</authentication-manager>
-	
+
 	<global-method-security secured-annotations="enabled" />
 
 	<http auto-config="true" use-expressions="true">
 		<!-- Security zones -->
-		<!-- <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" 
-			/> -->
-		<intercept-url pattern="/1user/**" access="hasRole('ROLE_USER')" />
-		<intercept-url pattern="/1item/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/item/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/resources/**" access="permitAll" />
 		<!-- Login pages -->
 		<form-login login-processing-url="/account/login"

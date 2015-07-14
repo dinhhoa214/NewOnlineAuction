@@ -12,8 +12,9 @@ public interface AccountService {
 	public static String NAME = "accountService";
 	// CRUD operations
 	// Save or Update
-	Account insertUser(Account user);
+	boolean insertUser(Account user);
 	Account updateUser(Account user);
+	boolean changePass(String oldPass, String newPass);
 
 	// Read
 	Account getById(int id);

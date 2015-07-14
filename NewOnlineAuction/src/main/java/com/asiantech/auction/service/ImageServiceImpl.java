@@ -3,12 +3,7 @@ package com.asiantech.auction.service;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-
-import javax.servlet.ServletContext;
- 
-
-
+import java.io.IOException;  
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,10 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class ImageServiceImpl implements ImageService{
-
-	@Autowired
-	private ServletContext context;
+public class ImageServiceImpl implements ImageService{ 
 	
 	@Autowired
 	private HandleImage handleIm;

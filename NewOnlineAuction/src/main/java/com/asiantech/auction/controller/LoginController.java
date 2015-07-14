@@ -1,36 +1,19 @@
 package com.asiantech.auction.controller;
  
-
-import org.springframework.beans.factory.annotation.Autowired;  
+ 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap; 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping; 
-import org.springframework.web.bind.annotation.RequestParam; 
-
-import com.asiantech.auction.entity.Account;
-import com.asiantech.auction.service.AccountService;
+import org.springframework.web.bind.annotation.RequestParam;  
  
 
 @Controller
 @RequestMapping("/account/")
-public class LoginController {
-	
-	@Autowired 
-	private AccountService accountSr; 
-	 
-	 
+public class LoginController { 
 	
 	@RequestMapping(value="login")
-	public String getLoginPage(@RequestParam(required= false) boolean error, ModelMap model){/*
-		Account test = accountSr.getUserByEmail("asd@gmail.com");
-		System.out.println(test.getEmail());
-		System.out.println(test.getPassword());*/
-		model.put("errorLogin", error);
+	public String getLoginPage(@RequestParam(required= false) boolean error, Model model){
+		model.addAttribute("errorLogin", error);
 		return "login";
-	}
-	
-	@RequestMapping(value="logout")
-	public String logOut(){
-		return "login";
-	}
+	} 
 }

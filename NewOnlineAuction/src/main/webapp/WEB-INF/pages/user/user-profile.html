@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+</head>
+<body>
+	<div th:fragment="content">
+		<div class="container">
+			<!-- Content -->
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="page-header">
+					<h2>User profile</h2>
+				</div>
+
+				<ul class="nav nav-tabs">
+					<li class="active"><a aria-expanded="false" href="#info-tab"
+						data-toggle="tab"> Information <i class="fa"></i></a></li>
+
+				</ul>
+
+				<button style="display: none; width: 0px; height: 0px;"
+					class="bv-hidden-submit" type="submit"></button>
+				<div class="tab-content">
+					<div class="tab-pane active" id="info-tab"
+						style="margin-top: 20px;">
+						<div class="col-sm-6">
+							User Name: <label th:text="${account.userName}"> </label> <br />
+							Email: <label th:text="${account.email}"> </label> <br />
+							Information: <label th:text="${account.iformation}"> </label> <br />
+							Role: <label th:text="${account.Role}"> </label> <br /> Rating:
+							<label th:text="${account.rating}"> </label><br /> Total Rating:
+							<label th:text="${account.totalRating}"> </label><br />
+						</div>
+
+						<div class="col-sm-6">
+							<img th:src="@{|/${account.image}|}" class="img-thumbnail"
+								style="width: 100px; height: 100px;" /> <br />
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<!-- end Container -->
+	</div>
+</body>
+</html>

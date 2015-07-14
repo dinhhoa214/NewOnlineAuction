@@ -14,7 +14,7 @@
 				<ol class="breadcrumb">
 					<li><a href="#">Home</a></li>
 					<li><a th:href="@{/category/} + ${categoryName}"
-						th:text=" ${categoryName} "> Category</a></li>
+						th:text=" ${item.category.name} "> Category</a></li>
 					<li class="active"><span th:text=" ${item.itemTitle} ">
 					</span></li>
 				</ol>
@@ -26,7 +26,7 @@
 							th:text=" ${item.itemDescription} "> </span>
 					</p>
 					<strong>Seller:</strong> <a
-						th:href="@{/user/} + ${item.createrId.userName}"
+						th:href="@{/user/profile/} + ${item.createrId.email}"
 						th:text="${item.createrId.userName}"> dinhhoa.vta </a>
 					<p>
 						<input type="number" data-max="10" data-min="1"
@@ -35,8 +35,7 @@
 							data-active-icon="fa-star" data-inactive-icon="fa-star-o"
 							data-clearable-icon="fa-trash-o" />
 					</p>
-					<img th:src="@{/resources/image/acer_450.jpg}"
-						src="../../../resources/image/acer_450.jpg" class="img-thumbnail"
+					<img th:src="@{|/${item.itemImage}|}" class="img-thumbnail"
 						style="width: 300px; height: 250px" />
 
 				</div>
@@ -51,22 +50,22 @@
 
 					<!-- <span th:text="| Item ${item.itemTitle} |"> </span> ${item.itemTitle} -->
 
-					<form th:action="@{/bidItem/} + ${item.itemId}" th:object="${bid}" method="post">
-
+					
+						<form th:action="@{bidItem} + ${item.itemId}" th:object="${bid}" method="post">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-									<th colspan="2" class="panel-heading">Item Details</th>
+									<th colspan="2" class="panel-heading">Item Details</th> 
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td>Currently: <p th:text=" ${{bidtop.amount}} ">VND</p></td>
-									<td>Start Bid: <span th:text=" ${item.miniumBid} ">VND</span></td>
+									<td>Currently: <strong><span th:text=" ${{bidtop.amount}} "></span></strong> VND</td>
+									<td>Start Bid: <span th:text=" ${item.miniumBid} "></span> VND</td>
 								</tr>
 								<tr>
 									<td>Start: <span th:text=" ${item.bidStartDate} "></span></td>
-									<td>Bids: <span th:text=" ${item.bids} "></span></td>
+									<td>Bids: <span th:text=" ${item.bids} "></span> </td>
 								</tr>
 								<tr>
 									<td>End: <span th:text=" ${item.bidEndDate} "></span></td>
@@ -77,23 +76,24 @@
 								</tr>
 								<tr>
 									<td>Your Bid:</td>
-									<td><input type="text" th:field="*{amount}" placeholder="VND" />   
+									<td>
+										<input type="text" th:field="*{amount}" placeholder="VND" />  
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2"><input type="submit" value="BID"
-										class="btn btn-success" /></td>
+									<td colspan="2"><input type="submit" value="BID" id="myBtnBID"
+										class="btn btn-success" /><p id="message" class="error"></p></td>
 								</tr>
 							</tbody>
 						</table>
 					</form>
 
-
+					<h3>Top 10 Bids hightless</h3>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Bid ID</th>
+								<th>Date</th>
 								<th>Bidder</th>
 								<th>Price</th>
 
@@ -103,7 +103,7 @@
 							<tr data-th-each="us,i : ${bids}">
 								<td data-th-text="${i.count}">1</td>
 
-								<td data-th-text="${us.numberIndex}">Dang su dung</td>
+								<td data-th-text="${us.date}">Dang su dung</td>
 								<td data-th-text="${us.bidderId.userName}">false</td>
 								<td data-th-text="${us.amount}">false</td>
 							</tr>
@@ -126,12 +126,14 @@
 	</script>
 		<script th:inline="javascript"> 
 $('[data-countdown]').each(function() {
-   var $this = $(this), finalDate = [[${item.bidEndDate}]];
+   var $this = $(this), finalDate = [[${item.bidEndDate}]];/* set End datetime for bid */
    $this.countdown(finalDate, function(event) {
     $this.html(event.strftime('%D Days %H hours, %M minutes, %S seconds.'));
    });
    $this.on('finish.countdown', function(event) {
-	     alert('Auction ended. User dinhhoa.vta is winter.');
+	   document.getElementById("myBtnBID").disabled = true;
+	   document.getElementById("message").innerHTML =
+	        "Auction ended. The user: " + [[${bidtop.bidderId.userName}]] + " is winter ! Congratulation!!!";
    });
   });
     </script>

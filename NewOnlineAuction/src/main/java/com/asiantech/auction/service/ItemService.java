@@ -12,6 +12,8 @@ public interface ItemService {
 	// Save or Update
 	Item insertItem(Item item);
 	Item updateItem(Item item);
+	void activeItem(int id);
+	void inActiveItem(int id);
 
 	// Read
 	Item getById(int id);
@@ -21,7 +23,9 @@ public interface ItemService {
 
 	// Get All
 	List<Item> getAll();
+	List<Item> getAllByUserId();
 	List<Item> getAllByCategory(Category cate);
+	List<Item> getAllByCategoryAndStatusActive(Category cate);
 
 	// Get All and Paging
 	Page<Item> getAllItemAndPagination(Pageable pageable); 

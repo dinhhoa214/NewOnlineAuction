@@ -1,4 +1,11 @@
-  
+.form-horizontal .has-feedback .form-control-feedback {
+        top: 0;
+        right: -15px;
+    }
+    .form-horizontal .has-feedback .input-group .form-control-feedback {
+        top: 0;
+        right: -30px;
+    }  
 .error{color: red;} 
 .dropdownwidth{
 	min-width: 1120px;

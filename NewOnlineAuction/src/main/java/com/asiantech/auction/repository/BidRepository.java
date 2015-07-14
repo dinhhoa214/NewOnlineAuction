@@ -9,6 +9,7 @@ import com.asiantech.auction.entity.Item;
 
 public interface BidRepository extends JpaRepository<Bid, Integer>{
 
-	Bid findFirstByOrderByAmountDesc();
-	List<Bid> findByItemId(Item item); 
+	Bid findFirstByItemIdOrderByAmountDesc(Item item);
+	
+	List<Bid> findTop10ByItemIdOrderByAmountDesc(Item item); 
 }

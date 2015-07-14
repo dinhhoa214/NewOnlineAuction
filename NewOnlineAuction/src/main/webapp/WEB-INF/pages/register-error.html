@@ -1,100 +1,107 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Online Auction Register User Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Online Auction Home Page</title>
 <link rel="stylesheet" type="text/css"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
 	th:href="@{/resources/css/bootstrap.min.css}" />
-<link rel="stylesheet" type="text/css" href="css/auction.custom.css"
-	th:href="@{/resources/css/auction.custom.css}" /> 	
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/auction.custom.css}" />
 <!-- Custom Fonts -->
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" 
-    th:href="@{/resources/css/font-awesome.min.css}" /> 	
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/font-awesome.min.css}" />
 <!-- Bootstrap validation -->
-<link rel="stylesheet" type="text/css" href="css/bootstrapValidator.min.css"
-	th:href="@{/resources/css/bootstrapValidator.min.css}" />	
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/bootstrapValidator.min.css}" />
+<script th:src="@{/resources/js/jquery-latest.min.js}"> </script>
+<script th:src="@{/resources/js/bootstrap.min.js}"></script>
+<script th:src="@{/resources/js/bootstrap-hover-dropdown.js}"></script>
+<script> 
+		$(document).ready(function() {
+			$('.js-activated').dropdownHover().dropdown();
+		});
+	</script>
+<!-- Bootstrap Validation -->
+<script th:src="@{/resources/js/bootstrapValidator.min.js}"></script>
 </head>
 <body>
-
 	<!-- Fixed navbar Header-->
-		<nav class="navbar navbar-default ">
+	<nav class="navbar navbar-default ">
 
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index">Logo Online Auction</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li ><a
-						href="http://localhost:8080/TemplateUI/index">Home</a></li>
-					<li><a href="#about">About us</a></li>
-					<li><a href="#contact">News</a></li>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index">Logo Online Auction</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="http://localhost:8080/TemplateUI/index">Home</a></li>
+				<li><a href="#about">About us</a></li>
+				<li><a href="#contact">News</a></li>
 
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					 <li><a href="login" >Login</a></li>
-					 <li class="active"><a href="register">Register</a></li>
-				</ul>
-				<!-- /.navbar-top-links -->
-			</div>
-			<!--/.nav-collapse -->
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/account/login}">Login</a></li>
+				<li class="active"><a href="#">Register</a></li>
+			</ul>
+			<!-- /.navbar-top-links -->
+		</div>
+		<!--/.nav-collapse -->
 
-		</nav>
+	</nav>
 	<div class="container">
 		<!-- Content -->
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
-		<h2><strong> REGISTER FORM </strong> </h2> <hr/>
-			<form id="registerForm" action="#" th:action="@{/register}" th:object="${user}" enctype="multipart/form-data"
-			method="post">
+			<h2>
+				<strong> REGISTER FORM </strong>
+			</h2>
+			<form id="registerForm" th:object="${account}"
+				th:action="@{/register}" enctype="multipart/form-data" method="post">
 				<div class="form-group">
-					<label >User Name</label>  
-					<input type="text"  class="form-control" th:field="*{userName}" /> 
-					<p class="text-danger" > User Name is exist.!</p>
+					<label>User Name</label> <input type="text" class="form-control"
+						th:field="*{userName}" />
 				</div>
 				<div class="form-group">
-					<label >Email</label>  
-					<input type="text"  class="form-control" th:field="*{email}" /> 
-					 
+					<label>Email</label> <input type="text" class="form-control"
+						th:field="*{email}" />
+					<p class="text-danger">Email is exist.!</p>
 				</div>
 				<div class="form-group">
-					<label >Information</label>  
-					<textarea class="form-control" rows="3" placeholder="Address" th:field="*{iformation}"></textarea> 
+					<label>Information</label>
+					<textarea class="form-control" rows="2.5" placeholder="Address"
+						th:field="*{iformation}"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">Password</label> 
-					<input type="password" class="form-control" th:field="*{password}"
-						placeholder="Password" /> 
+					<label for="exampleInputPassword1">Password</label> <input
+						type="password" class="form-control" th:field="*{password}"
+						placeholder="Password" />
 				</div>
 				<div class="form-group">
-					<label>Re- password</label> 
-					<input type="password" class="form-control" name="confirmPassword"
-                data-fv-identical="true"
-                data-fv-identical-field="password"
-                data-fv-identical-message="The password and its confirm are not the same" />
-				</div>  
+					<label>Re- password</label> <input type="password"
+						class="form-control" name="confirmPassword"
+						data-fv-identical="true" data-fv-identical-field="password"
+						data-fv-identical-message="The password and its confirm are not the same" />
+				</div>
 				<div class="form-group">
-				    <label for="exampleInputFile">File Image</label>
-				    <input type="file" th:field="*{image}"/>
-				    <p class="help-block">Choose image for User Avatar</p>
-				  </div> 
-				 
-				<button type="submit" class="btn btn-default">Submit</button>
+					<label for="exampleInputFile">File Image</label> <input type="file"
+						th:field="*{image}" />
+					<p class="help-block">Choose image for User Avatar</p>
+
+				</div>
+				<button type="submit" class="btn btn-success">Submit</button>
 			</form>
 		</div>
 
 	</div>
 	<!-- end Container -->
-	 
+
 	<script src="js/jquery-latest.min.js"
 		th:src="@{/resources/js/jquery-latest.min.js}">
 		
@@ -113,7 +120,7 @@
 	<!-- Bootstrap Validation -->
 	<script src="js/bootstrapValidator.min.js"
 		th:src="@{/resources/js/bootstrapValidator.min.js}"></script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 $(document).ready(function() {
     $('#registerForm')
         .bootstrapValidator({

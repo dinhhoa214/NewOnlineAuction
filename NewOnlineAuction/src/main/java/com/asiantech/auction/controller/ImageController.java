@@ -22,10 +22,10 @@ public class ImageController {
 	//http://localhost:8080/TemplateUI/item/1434096859141data-types.jpg
 	@RequestMapping("/{path}/{pathImage:.*}")
 	public ResponseEntity<byte[]> testphoto(@PathVariable String path,@PathVariable String pathImage,
-			HttpServletResponse response) throws IOException { 
+			HttpServletResponse response) throws IOException {  
 		if(StringUtils.isBlank(pathImage)){
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-		}
+		} 
 		ResponseEntity<byte[]> responseEntity = imageSv.getResponseImage(path,pathImage);
 		if(responseEntity.getStatusCode().equals(HttpStatus.NOT_FOUND)){
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);

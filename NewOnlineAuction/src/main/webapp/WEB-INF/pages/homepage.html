@@ -1,207 +1,214 @@
-<!DOCTYPE html> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>  	
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">	
+<head>
 </head>
-<body>  
+<body>
 	<div th:fragment="content">
-	<div class="container">
-		<!-- include header -->
+		<div class="container">
+			<!-- include header -->
 
-		<!-- Content -->
-		<div class="row">
-			<!-- News Auction -->
-			<div class="bg-info">
-				<blockquote>
-					<p class="text-justify text-capitalize">News Auction</p>
-				</blockquote>
+			<!-- Content -->
+			<div class="row">
+				<!-- News Auction -->
+				<div class="bg-info">
+					<blockquote>
+						<p class="text-justify text-capitalize">News Auction</p>
+						[[${#httpServletRequest.remoteUser}]]
+						<div sec:authorize="hasRole('ROLE_ADMIN')">
+  This content is only shown to administrators.
+</div>
+<div sec:authorize="hasRole('ROLE_USER')">
+  This content is only shown to users.
+</div>
+					</blockquote>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Artemis_Bronze </a> <img
+						th:src="@{/resources/image/artemis_bronze.jpg}"
+						src="../../../resources/image/artemis_bronze.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>4.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Badminton Cabinet </a> <img
+						th:src="@{/resources/image/badminton_cabinet.jpg}"
+						src="../../../resources/image/badminton_cabinet.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>5.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Codex Hammer</a> <img
+						th:src="@{/resources/image/codex_hammer.jpg}"
+						src="../../../resources/image/codex_hammer.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>24.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Elvis Presley </a> <img
+						th:src="@{/resources/image/elvis_presley.jpg}"
+						src="../../../resources/image/elvis_presley.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>7.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Ferrari Testa Rossa A </a> <img
+						th:src="@{/resources/image/ferrari_testa_rossa_a.jpg}"
+						src="../../../resources/image/ferrari_testa_rossa_a.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>121.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Guarneri Del Gesu </a> <img
+						th:src="@{/resources/image/guarneri_del_gesu.jpg}"
+						src="../../../resources/image/guarneri_del_gesu.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>23.000.000 VND</strong>
+					</p>
+				</div>
 			</div>
-			<div class="col-md-2">
-				<a href="#">Artemis_Bronze </a> <img
-					th:src="@{/resources/image/artemis_bronze.jpg}"
-					src="../../../resources/image/artemis_bronze.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>4.000.000 VND</strong>
-				</p>
+			<!-- End News Auction -->
+
+			<div class="row">
+				<!-- Hot Auction -->
+				<div class="bg-info">
+					<blockquote>
+						<p class="text-justify text-capitalize">Hot Auction</p>
+					</blockquote>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Ferrari Testa Rossa A </a> <img
+						th:src="@{/resources/image/ferrari_testa_rossa_a.jpg}"
+						src="../../../resources/image/ferrari_testa_rossa_a.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>121.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Guarneri Del Gesu </a> <img
+						th:src="@{/resources/image/guarneri_del_gesu.jpg}"
+						src="../../../resources/image/guarneri_del_gesu.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>23.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Artemis_Bronze </a> <img
+						th:src="@{/resources/image/artemis_bronze.jpg}"
+						src="../../../resources/image/artemis_bronze.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>4.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Marilyn Monroe </a> <img
+						th:src="@{/resources/image/marilyn_monroe.jpg}"
+						src="../../../resources/image/marilyn_monroe.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>115.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Codex Hammer</a> <img
+						th:src="@{/resources/image/codex_hammer.jpg}"
+						src="../../../resources/image/codex_hammer.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>24.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Elvis Presley </a> <img
+						th:src="@{/resources/image/elvis_presley.jpg}"
+						src="../../../resources/image/elvis_presley.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>7.000.000 VND</strong>
+					</p>
+				</div>
 			</div>
-			<div class="col-md-2">
-				<a href="#">Badminton Cabinet </a> <img
-					th:src="@{/resources/image/badminton_cabinet.jpg}"
-					src="../../../resources/image/badminton_cabinet.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>5.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Codex Hammer</a> <img
-					th:src="@{/resources/image/codex_hammer.jpg}"
-					src="../../../resources/image/codex_hammer.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>24.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Elvis Presley </a> <img
-					th:src="@{/resources/image/elvis_presley.jpg}"
-					src="../../../resources/image/elvis_presley.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>7.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Ferrari Testa Rossa A </a> <img
-					th:src="@{/resources/image/ferrari_testa_rossa_a.jpg}"
-					src="../../../resources/image/ferrari_testa_rossa_a.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>121.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Guarneri Del Gesu </a> <img
-					th:src="@{/resources/image/guarneri_del_gesu.jpg}"
-					src="../../../resources/image/guarneri_del_gesu.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>23.000.000 VND</strong>
-				</p>
+			<!-- End Hot Auction -->
+
+			<div class="row">
+				<!-- End Auction -->
+				<div class="bg-info">
+					<blockquote>
+						<p class="text-justify text-capitalize">End Auction</p>
+					</blockquote>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Mark Mcgwire Baseball </a> <img
+						th:src="@{/resources/image/mark_mcgwire_baseball.jpg}"
+						src="../../../resources/image/mark_mcgwire_baseball.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>11.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Picasso Painting</a> <img
+						th:src="@{/resources/image/picasso_painting.jpg}"
+						src="../../../resources/image/picasso_painting.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>123.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Artemis_Bronze </a> <img
+						th:src="@{/resources/image/artemis_bronze.jpg}"
+						src="../../../resources/image/artemis_bronze.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>4.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Wittlsbach Diamond</a> <img
+						th:src="@{/resources/image/wittlsbach_diamond.jpg}"
+						src="../../../resources/image/wittlsbach_diamond.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>19.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Codex Hammer</a> <img
+						th:src="@{/resources/image/codex_hammer.jpg}"
+						src="../../../resources/image/codex_hammer.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>24.000.000 VND</strong>
+					</p>
+				</div>
+				<div class="col-md-2">
+					<a href="#">Elvis Presley </a> <img
+						th:src="@{/resources/image/elvis_presley.jpg}"
+						src="../../../resources/image/elvis_presley.jpg"
+						class="img-thumbnail" />
+					<p class="text-center">
+						<strong>7.000.000 VND</strong>
+					</p>
+				</div>
+
 			</div>
 		</div>
-		<!-- End News Auction -->
-
-		<div class="row">
-			<!-- Hot Auction -->
-			<div class="bg-info">
-				<blockquote>
-					<p class="text-justify text-capitalize">Hot Auction</p>
-				</blockquote>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Ferrari Testa Rossa A </a> <img
-					th:src="@{/resources/image/ferrari_testa_rossa_a.jpg}"
-					src="../../../resources/image/ferrari_testa_rossa_a.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>121.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Guarneri Del Gesu </a> <img
-					th:src="@{/resources/image/guarneri_del_gesu.jpg}"
-					src="../../../resources/image/guarneri_del_gesu.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>23.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Artemis_Bronze </a> <img
-					th:src="@{/resources/image/artemis_bronze.jpg}"
-					src="../../../resources/image/artemis_bronze.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>4.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Marilyn Monroe </a> <img
-					th:src="@{/resources/image/marilyn_monroe.jpg}"
-					src="../../../resources/image/marilyn_monroe.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>115.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Codex Hammer</a> <img
-					th:src="@{/resources/image/codex_hammer.jpg}"
-					src="../../../resources/image/codex_hammer.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>24.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Elvis Presley </a> <img
-					th:src="@{/resources/image/elvis_presley.jpg}"
-					src="../../../resources/image/elvis_presley.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>7.000.000 VND</strong>
-				</p>
-			</div>
-		</div>
-		<!-- End Hot Auction -->
-
-		<div class="row">
-			<!-- End Auction -->
-			<div class="bg-info">
-				<blockquote>
-					<p class="text-justify text-capitalize">End Auction</p>
-				</blockquote>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Mark Mcgwire Baseball </a> <img
-					th:src="@{/resources/image/mark_mcgwire_baseball.jpg}"
-					src="../../../resources/image/mark_mcgwire_baseball.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>11.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Picasso Painting</a> <img
-					th:src="@{/resources/image/picasso_painting.jpg}"
-					src="../../../resources/image/picasso_painting.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>123.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Artemis_Bronze </a> <img
-					th:src="@{/resources/image/artemis_bronze.jpg}"
-					src="../../../resources/image/artemis_bronze.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>4.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Wittlsbach Diamond</a> <img
-					th:src="@{/resources/image/wittlsbach_diamond.jpg}"
-					src="../../../resources/image/wittlsbach_diamond.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>19.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Codex Hammer</a> <img
-					th:src="@{/resources/image/codex_hammer.jpg}"
-					src="../../../resources/image/codex_hammer.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>24.000.000 VND</strong>
-				</p>
-			</div>
-			<div class="col-md-2">
-				<a href="#">Elvis Presley </a> <img
-					th:src="@{/resources/image/elvis_presley.jpg}"
-					src="../../../resources/image/elvis_presley.jpg"
-					class="img-thumbnail" />
-				<p class="text-center">
-					<strong>7.000.000 VND</strong>
-				</p>
-			</div>
-
-		</div>
-	</div>
-	<!-- end Container --> 
+		<!-- end Container -->
 	</div>
 </body>
 </html>

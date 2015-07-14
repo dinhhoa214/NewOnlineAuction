@@ -12,19 +12,19 @@ public interface BidService {
 	public static String NAME = "bidService";
 	// CRUD operations
 	// Save or Update
-	boolean insertBid(Bid bid, int itemId);
+	boolean insertBid(Bid bid);
 	Bid updateBid(Bid bid);
 
 	// Read
 	Bid getById(int id);
-	Bid getByAmountTop();
+	Bid getByItemOrderAmountTop(Item item);
 
 	// Delete
 	void deleteById(int id);
 
 	// Get All
 	List<Bid> getAll();
-	List<Bid> getAllByItemId(Item item);
+	List<Bid> getTop10ByItemId(Item item);
 
 	// Get All and Paging
 	Page<Bid> getAllBidAndPagination(Pageable pageable); 

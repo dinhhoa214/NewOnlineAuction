@@ -9,30 +9,45 @@ import javax.validation.constraints.NotNull;
 
 @Entity 
 public class Bid {
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private int numberIndex; 
 	
 	@NotNull 
-	private long amount;
+	private long amount; 
 	
-	
-	 
 	@ManyToOne
 	private Item itemId;
+	
 	@ManyToOne 
 	private Account bidderId;
+	
+	private String Date;
 
 	public Bid() { 
-	}
+	} 
+	
 	 
-	public Bid(int numberIndex, String bidId, long amount, Account createrId,
-			Item itemId, Account bidderId) { 
-		this.numberIndex = numberIndex; 
-		this.amount = amount; 
+
+	public Bid(long amount, Item itemId, Account bidderId) {
+		super();
+		this.amount = amount;
 		this.itemId = itemId;
 		this.bidderId = bidderId;
 	}
+
+
+
+	public Bid(long amount, Item itemId, Account bidderId, String date) {
+		super(); 
+		this.amount = amount;
+		this.itemId = itemId;
+		this.bidderId = bidderId;
+		Date = date;
+	}
+
+
 
 	public int getNumberIndex() {
 		return numberIndex;
@@ -41,6 +56,14 @@ public class Bid {
 	public void setNumberIndex(int numberIndex) {
 		this.numberIndex = numberIndex;
 	} 
+
+	public String getDate() {
+		return Date;
+	}
+
+	public void setDate(String date) {
+		Date = date;
+	}
 
 	public long getAmount() {
 		return amount;

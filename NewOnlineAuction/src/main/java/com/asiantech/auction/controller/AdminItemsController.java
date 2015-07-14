@@ -35,4 +35,16 @@ public class AdminItemsController {
 		model.addAttribute(item); 
 		return "admin/admin-views";
     }
+	
+	@RequestMapping("/activeItem")
+	public String activeItem(@RequestParam int id){ 
+    	itemSv.activeItem(id);
+		return "redirect:adminItems";
+	}
+	
+	@RequestMapping("/inActiveItem")
+	public String inActiveItem(@RequestParam int id){ 
+    	itemSv.inActiveItem(id);
+		return "redirect:adminItems";
+	}
 }
